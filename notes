@@ -1,0 +1,83 @@
+Installation of Fedora on the Raspberry Pi 4:
+
+Based on: https://pete.akeo.ie/2019/07/installing-debian-arm64-on-raspberry-pi.html
+
+Using latest image from: https://arm.fedoraproject.org/
+
+Using RPi4 firmware from: https://github.com/pftf/RPi4/releases/tag/v1.20
+
+Partition microsd (using 32GB)
+
+Now, at your shell:
+# fdisk /dev/sdN
+(where N is the number of the disk in /dev/)
+
+> o (create dos partition table)
+> n (new partition)
+> p (primary)
+> 1 (first)
+> (leave blank, start at default of 2048)
+> +512M (plenty of room for doing things)
+(if it asks you if you want to remove a vfat signature or something, just do it. We will be formatting anyway)
+> t (select partition 1)
+> e (type 0e W95 FAT16 (LBA), use > L to see all if you're curious)
+> a (toggle the bootable flag on partition 1
+> w (write the changes to the disk)
+
+And back at the shell:
+# mkfs.vfat -F 16 /dev/sdN1 (make that VFAT partition)
+
+Now, mount the new partition and extrat the UEFI bootloader onto it:
+# mount /dev/sdN1 <mount_dir> (mount dir can be any dir)
+# unzip RPi4_UEFI_Firmware_v1.20.zip -d <mount_dir>
+
+
+Experimental:
+Create 8G partition at the end of the disk using sector math
+
+sector 52273152 to end on 32 GB disk with 512 bytes sectors
+# sudo xzcat Fedora-Minimal-32-1.6.aarch64.raw.xz | sudo dd of=/dev/sdd2 bs=4M status=progress
+
+OK so that didn't work
+
+The upstream image works, but no USB support
+
+Some commits that may be relevant:
+
+commit 63e58f2bb9d8e7b56bf2a2ccf607d6bb4340d32a
+Author: Maxime Ripard <maxime@cerno.tech>
+Date:   Mon Jun 15 10:41:04 2020 +0200
+
+    ARM: dts: bcm2711: Add firmware clocks node
+
+commit 74a0caa5ef1c25905c4409b350ed9a8e0d9a3b74
+Author: Maxime Ripard <maxime@cerno.tech>
+Date:   Mon Jun 15 10:40:42 2020 +0200
+
+    dt-bindings: clock: Add a binding for the RPi Firmware clocks
+
+commit 1bc95972715ab81fd3fa9f5b45ace5bb607af1b5
+Author: Maxime Ripard <maxime@cerno.tech>
+Date:   Thu Jun 11 11:23:16 2020 +0200
+
+    clk: bcm: Add BCM2711 DVP driver
+
+commit 8dda00049093786c9ff8cf9474b96aa60ed961cd
+Author: Maxime Ripard <maxime@cerno.tech>
+Date:   Thu Jun 11 11:23:15 2020 +0200
+
+    dt-bindings: clock: Add BCM2711 DVP binding
+
+
+Interesting reddit post:
+https://www.reddit.com/r/raspberry_pi/comments/gte2lp/raspberry_pi_4_uefi_boot/
+
+
+Current method:
+1. put UEFI firmware on SD card as described above
+2. Flash Fedora aarch64 bootable iso to USB flash drive (I used fedora 32)
+3. Get a spare USB flash drive on which to actually install fedora
+3a. note: the installer cannot detect the SD card
+3b. upstream issue: https://github.com/pftf/RPi4/issues/26
+4. Boot into installation iso and install to other flash drive
+
