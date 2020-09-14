@@ -108,3 +108,25 @@ Date:   Wed Nov 6 10:59:44 2019 +0100
     ARM: dts: bcm2711: force CMA into first GB of memory
 
 
+
+Issues:
+No SD card support in Linux (current support is in device tree)
+No GPIO support in Linux (current support is in device tree)
+
+genet networking support:
+https://edk2.groups.io/g/devel/message/53665
+
+
+Here is where the ACPI support for rpi4 genet driver is added:
+
+commit 99c6b06a37d4cab118c45448fef9d28df62d35d8
+Author: Jeremy Linton <jeremy.linton@arm.com>
+Date:   Mon Feb 24 16:54:01 2020 -0600
+
+GPIO with ACPI documentation:
+kernel.org/doc/html/latest/driver-api/gpio/board.html
+
+GPIO ACPI entry in edk2:
+https://github.com/tianocore/edk2-platforms/blob/cc7a0c68618cb5384c9cf11c5c2c1805681350dc/Platform/RaspberryPi/RPi4/AcpiTables/Dsdt.asl#L247
+
+
