@@ -11,3 +11,5 @@ copy over the config and validate it:
 Compile The Kernel (this gets the CPU hot):
 # make Image -j4 && make modules -j 4 && make -j 4 modules_install
 
+(I haven't been able to actually install and boot a kernel yet for various reasons
+but I have not given up)
