@@ -16,7 +16,7 @@ but they will work fine with UID 0 anyway.
 
 At the shell:
 ```bash
-# fdisk /dev/sdN
+fdisk /dev/sdN
 ```
 (where N is the number of the SD card in `/dev/`)
 
@@ -37,13 +37,13 @@ Enter the following commands (parentheticals are explanation)
 
 And back at the shell:
 ```bash
-# mkfs.vfat -F 16 /dev/sdN1 (make that VFAT partition)
+mkfs.vfat -F 16 /dev/sdN1 (make that VFAT partition)
 ```
 
-3. Mount the new partition and extract the UEFI bootloader onto it:
+3. Mount the new partition and extract the UEFI bootloader onto it with the following comamnds:
 ```bash
-# mount /dev/sdN1 <mount_dir> # (mount dir can be any dir)
-# unzip RPi4_UEFI_Firmware_v1.20.zip -d <mount_dir>
+mount /dev/sdN1 <mount_dir> # (mount dir can be any dir)
+unzip RPi4_UEFI_Firmware_v1.20.zip -d <mount_dir>
 ```
 
 ---
@@ -75,8 +75,10 @@ Date:   Mon Feb 24 16:54:01 2020 -0600
 
 5. Extract Fedora onto a flash drive that you are cool with wiping
 
+
+Run the following command:
 ```bash
-# xzcat Fedora-Minimal-Rawhide-<some_numbers_idk>.aarch64.raw.xz | dd of=/dev/sdN status=progress bs=4M
+xzcat Fedora-Minimal-Rawhide-<some_numbers_idk>.aarch64.raw.xz | dd of=/dev/sdN status=progress bs=4M
 ```
 
 ---
