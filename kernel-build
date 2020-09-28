@@ -1,0 +1,13 @@
+install deps:
+# dnf -y install gcc flex make bison openssl openssl-devel elfutils-libelf-devel ncurses-devel bc git tar
+
+get the mainline kernel:
+# git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
+
+copy over the config and validate it:
+# cp /boot/config-5.8.0-1.fc33.aarch64 .config
+# make olddefconfig
+
+Compile The Kernel (this gets the CPU hot):
+# make Image -j4 && make modules -j 4 && make -j 4 modules_install
+

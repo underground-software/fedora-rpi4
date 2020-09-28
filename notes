@@ -130,3 +130,6 @@ GPIO ACPI entry in edk2:
 https://github.com/tianocore/edk2-platforms/blob/cc7a0c68618cb5384c9cf11c5c2c1805681350dc/Platform/RaspberryPi/RPi4/AcpiTables/Dsdt.asl#L247
 
 
+Recent patchset by Bartosz
+
+https://lkml.org/lkml/2020/9/9/304
