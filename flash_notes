@@ -1,0 +1,7 @@
+timing using redirect (xzcat os_image > /dev/sd<N>) instead of dd
+
+real	3m24.180s
+user	0m59.653s
+sys	0m2.213s
+
+Next: time using dd to compare

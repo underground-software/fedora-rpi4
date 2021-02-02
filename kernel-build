@@ -8,8 +8,28 @@ copy over the config and validate it:
 # cp /boot/config-5.8.0-1.fc33.aarch64 .config
 # make olddefconfig
 
-Compile The Kernel (this gets the CPU hot):
-# make Image -j4 && make modules -j 4 && make -j 4 modules_install
+keep it small if you don't have space
+# make localmodconfig
 
-(I haven't been able to actually install and boot a kernel yet for various reasons
-but I have not given up)
+Compile The Kernel (CPU gets hot):
+Don't use multiple cores unless you have cooling! The pi _will_ overheat
+# make && make modules_install
+
+The rest of this assumes you are using kernel 5.11.0-rc6
+(latest at time of writing but replace if newer, see Makefile)
+
+Make kernel image executable (I assume this is neccessary:
+# chmod 755 arch/arm64/boot/Image.gz
+
+Put the kernel in the boot directory where it belongs:
+# cp arch/arm64/boot/Image.gz /boot/vmlinux-5.11.0-rc6-fresh
+ 
+Generate the initial ram filesystem (initramfs):
+# sudo dracut --kver 5.11.0-rc6
+
+Add an entry to grub to be able to select the kernel at boot:
+# grubby --add-kernel /boot/vmlinuz-5.11.0-rc6 --title="Fedora (5.11.0-rc6) 33 (Thirty Three)"
+
+Reboot! You should be able to run your new kernel :)
+
+Next: investigate device tree
