@@ -18,11 +18,11 @@ Don't use multiple cores unless you have cooling! The pi _will_ overheat
 The rest of this assumes you are using kernel 5.11.0-rc6
 (latest at time of writing but replace if newer, see Makefile)
 
-Make kernel image executable (I assume this is neccessary:
+Make kernel image executable (I assume this is neccessary):
 # chmod 755 arch/arm64/boot/Image.gz
 
 Put the kernel in the boot directory where it belongs:
-# cp arch/arm64/boot/Image.gz /boot/vmlinux-5.11.0-rc6-fresh
+# cp arch/arm64/boot/Image.gz /boot/vmlinuz-5.11.0-rc6
  
 Generate the initial ram filesystem (initramfs):
 # sudo dracut --kver 5.11.0-rc6
