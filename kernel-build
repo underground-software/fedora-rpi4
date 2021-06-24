@@ -3,11 +3,11 @@ Guide for kernel build.
 install dependencies:
 # dnf -y install gcc flex make bison openssl openssl-devel elfutils-libelf-devel ncurses-devel bc git tar dwarves 
 
-get kernel from sensehat branch:
-# git clone https://github.com/underground-software/linux.git
+get kernel from upstream repo:
+# git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/
 
 copy over config and validate it: 
-# cp /boot/config-5.11.12-200.fc33.aarch64 .config
+# cp /boot/config-<kernel-version>.aarch64 .config
 # make olddefconfig
 
 Compile The Kernel (use cooling case or CPU gets hot):
@@ -27,6 +27,9 @@ Set compiled kernel as default kernel:
 
 Reboot system: 
 # sudo reboot
+
+The following only applies if you are booting with UEFI
+ 
 On reboot, press esc to display menu and go to:
 Device manager -> Raspberry Pi Configuration -> Advanced Configuration
 Set < System Table Selection > to <ACPI + Devicetree> 
