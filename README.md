@@ -10,7 +10,7 @@ but they will work fine with UID 0 anyway.
 
 1. Get the latest RPi4 UEFI firmware
 
-[v1.20 here](https://github.com/pftf/RPi4/releases/tag/v1.20)
+[Releases page on their GitHub](https://github.com/pftf/RPi4/releases)
 
 2. Format an SD card to hold the UEFI firmware:
 
@@ -51,29 +51,17 @@ unzip RPi4_UEFI_Firmware_v1.20.zip -d <mount_dir>
 ---
 *Note: I don't think it would be that complicated to put the UEFI
 firmware on the flash drive to create a single bootable image,
-perhaps by mounting a spin archive before flashing*
+perhaps by mounting a spin archive before flashing. I have not
+tried this, however.*
 
 ---
 
-4. Get a Fedora Rawhide spin (because it has a relatively new kernel)
+4. Get a a fresh Fedora image
 
-From somewhere in [here](https://kojipkgs.fedoraproject.org/compose/rawhide)
+From [here](https://alt.fedoraproject.org/alt/)
 
 I recommend the minimal image because it is small.
 
----
-*Note: what are we missing in Fedora 32 and Linux < 5.7?
-For one, ACPI support of the genet Ethernet driver,
-which was added in the following patch:*
-
-```git
-commit 99c6b06a37d4cab118c45448fef9d28df62d35d8
-Author: Jeremy Linton <jeremy.linton@arm.com>
-Date:   Mon Feb 24 16:54:01 2020 -0600
-
-    net: bcmgenet: Initial bcmgenet ACPI support
-```
----
 
 5. Extract Fedora onto a flash drive that you are cool with wiping
 
@@ -84,12 +72,6 @@ xzcat Fedora-Minimal-Rawhide-<some_numbers_idk>.aarch64.raw.xz | dd of=/dev/sdM 
 
 (where M is alphabetical index of the Flash drive in `/dev/`)
 
----
-*Note: I'm not sure how ideal the `bs=4M` argument is for USB drives.
-I've seen it recommended for SD cards but I haven't looked into it
-for this particular case.*
-
----
 
 6. Boot Fedora via UEFI
 
@@ -112,13 +94,6 @@ on a device not yet explicitly supported by the maintainers of Fedora ARM,
 but that's part of the fun.
 
 ---
-*Note: This process worked just fine for me on some old USB flash drive,
-but I ran out of space trying to compile the kernel since it only had 16 GB
-and the kernel is quite girthy. I bought two 64 GB USB devices,
-[this product on amazon](https://www.amazon.com/gp/product/B07PV8KZ3T/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1),
-and I was unable to boot Fedora Rawhide. At the time of this writing,
-it was a slightly older version, so I may try it again, but there also
-might be some kind of hardware issue. I don't really know what's going on,
-so if anyone reads this and has some clue, please let me know.*
-
----
+If you would like to enable Device Tree, do so in the UEFI menu
+that appears when you press "esc" at the raspberry pi logo that appears
+at the start of booting. By defauly, only ACPI is enabled.
