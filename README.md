@@ -37,7 +37,7 @@ Enter the following commands (parentheticals are explanation)
 
 And back at the shell:
 ```bash
-mkfs.vfat -F 16 /dev/sdN1 (make that VFAT partition)
+mkfs.vfat -F 16 /dev/sd<LETTER>1 (make that VFAT partition)
 ```
 
 3. Mount the new partition and extract the UEFI bootloader onto it
@@ -45,7 +45,7 @@ mkfs.vfat -F 16 /dev/sdN1 (make that VFAT partition)
 Run the following comamnds:
 ```bash
 mount /dev/sdN1 <mount_dir> # (mount dir can be any dir)
-unzip RPi4_UEFI_Firmware_v1.20.zip -d <mount_dir>
+unzip RPi4_UEFI_Firmware_v<VERSION>.zip -d <mount_dir>
 ```
 
 ---
