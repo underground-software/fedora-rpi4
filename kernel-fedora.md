@@ -7,7 +7,10 @@
 cd && https://gitlab.com/cki-project/kernel-ark
 ```
 
+
 The "os-build" branch is the master for kernel-ark and one should open merg e requests (MRs) against this branch.
+
+More information on the Always Ready Kernel is available [here](https://cki-project.gitlab.io/kernel-ark/)
 
 3. Use of Fedora Linux as a development environment is encouraced but not required. However, the following may need substantial tweaking to work on non-Fedora distributions
 
@@ -18,6 +21,8 @@ dnf install fedora-packager
 KRB5_TRACE=/dev/stdout kinit ${FAS_USERNAME}@FEDORAPROJECT.ORG
 echo ${FAS_USERNAME} > ~/.fedora.upn
 ```
+
+More information on koji is available [here](https://docs.fedoraproject.org/en-US/package-maintainers/Using_the_Koji_Build_System/)
 
 
 5. Install dependencies and configure git if necessary:
