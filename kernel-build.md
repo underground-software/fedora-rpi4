@@ -26,7 +26,7 @@ make -j4
 
 Install:
 ```bash
-make install dtbs
+make dtbs_install
 make install 
 ```
 
