@@ -51,3 +51,10 @@ On reboot, press esc to display menu and go to:
 Device manager -> Raspberry Pi Configuration -> Advanced Configuration
 Set < System Table Selection > to <ACPI + Devicetree> 
 
+Sometimes you find some neat patches here also:
+
+```
+https://git.kernel.org/pub/scm/linux/kernel/git/nsaenz/linux-rpi.git # Raspberry Pi development tree for kernel.org
+https://github.com/raspberrypi/linux # Raspberry Pi foundation's tree
+```
+
