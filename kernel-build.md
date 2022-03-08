@@ -31,13 +31,16 @@ make install
 ```
 
 ```bash
-Rename device tree blobs to fix a symlink:
-mv /boot/dtbs/<new-version> /boot/dtb-<new-version>
+cd /boot
+to_link="$(ls -t | grep dtb | grep -v ^dtb$ | head -n1)"
+ln -sf $to_link dtb
 ```
 
 Set compiled kernel as default kernel:
 ```bash
-grubby --set-default /boot/<vmlinuz-new-version>
+cd /boot
+to_grub="$(ls -t $PWD/vmlinuz* | head -n1)"
+grubby --set-default $to_grub
 ```
 
 Reboot system: 
